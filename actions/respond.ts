@@ -1,12 +1,10 @@
-import { About } from "../models/about.ts";
-
 /**
  * Constructs response data based on provided interface.
  * Note that this method does not check if the model is available (see router.ts)
  * @param model interface to use to construct response data
  */
 export async function constructResponse(model: string): Promise<Object> {
-    let m  = await import("../models/" + model);
+    let m  = await import(`../models/${model}?${Math.random()}.ts`);
     console.log(m[Object.keys(m)[0]]);
     return m[Object.keys(m)[0]];
 }

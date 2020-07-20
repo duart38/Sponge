@@ -1,10 +1,6 @@
-// export interface About{
-//     title: String,
-//     body: String,
-//     owner: String
-// }
+import { dummyTitle } from "../plugins/titlePlugin.ts";
+
 export const About = {
-    title: String,
-    body: String,
-    owner: String
+    title: dummyTitle(10), // < plugins
+    description: "static stuff"
 }

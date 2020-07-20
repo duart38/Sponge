@@ -14,8 +14,8 @@ export default class Router {
     return this.models.includes(text);
   }
 
-  private populateModels() {
-    for (const dirEntry of Deno.readDirSync("./models")) {
+  private async populateModels() {
+    for await (const dirEntry of Deno.readDir("./models")) {
       console.log(dirEntry.name);
       // const data = await Deno.readTextFile("hello.txt");
       // console.log(data);

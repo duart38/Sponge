@@ -1,13 +1,12 @@
-import {About} from "../models/about.ts";
+import { About } from "../models/about.ts";
 
 /**
- * Constructs response data based on provided interface. 
+ * Constructs response data based on provided interface.
  * Note that this method does not check if the model is available (see router.ts)
  * @param model interface to use to construct response data
  */
-export function constructResponse(model:String) : object{
-   console.log(About.body);
-   console.log(About["body"]);
-   console.log(eval(About["body"]("'test'")))
-   return {};
+export async function constructResponse(model: string): Promise<Object> {
+    let m  = await import("../models/" + model);
+    console.log(m[Object.keys(m)[0]]);
+    return m[Object.keys(m)[0]];
 }

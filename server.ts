@@ -1,11 +1,13 @@
 import { serve } from "https://deno.land/std/http/server.ts";
 import { printUnknownRequest } from "./actions/print.ts";
-import { warningLog } from "https://deno.land/x/colorlog/mod.ts";
+import { warningLog, successLog } from "https://deno.land/x/colorlog/mod.ts";
 import Router from "./router.ts";
 import { constructResponse } from "./actions/respond.ts";
 import Watcher from "./fileWatcher.ts";
 
-const server = serve({ port: 8000 });
+const port = Number.parseInt(Deno.env.get("PORT") ?? "8000") || 8000;
+const server = serve({ port }); 
+successLog(`[+] Server running on port: ${port}`);
 const router = new Router();
 const watcher = new Watcher("./models");
 

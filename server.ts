@@ -18,7 +18,7 @@ for await (const req of server) {
   const urlMethod = req.url.split("/")[req.url.split("/").length - 1] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
   if (router.contains(urlMethod)) {
     // model exists with the url method.. user most likely wants some data
-    req.respond(constructResponse("ss"));
+    req.respond(constructResponse(urlMethod));
   } else {
     warningLog(
       `[+] Printing unknown request (${urlMethod}) and responding with an empty object`

@@ -8,5 +8,6 @@ import {About} from "../models/about.ts";
 export function constructResponse(model:String) : object{
    console.log(About.body);
    console.log(About["body"]);
+   console.log(eval(About["body"]("'test'")))
    return {};
 }

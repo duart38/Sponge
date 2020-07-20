@@ -5,6 +5,5 @@
  */
 export async function constructResponse(model: string): Promise<Object> {
     let m  = await import(`../models/${model}?${Math.random()}.ts`);
-    console.log(m[Object.keys(m)[0]]);
-    return m[Object.keys(m)[0]];
+    return await m[Object.keys(m)[0]];
 }

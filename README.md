@@ -4,6 +4,9 @@ Quickly make api used for testing.
 
 # How to
 Just run the server and make some calls to it, Sponge will print out information about the request you just sent.
+```Shell
+deno run --allow-env --allow-net --allow-read server.ts
+```
 
 ### Need some data?
 No problem. Just throw some **stuff** in the models folder (use about.ts as an example) and Sponge will watch for changes and reload accordingly.

@@ -15,7 +15,9 @@ const watcher = new Watcher("./models");
 let handleRequest = async (req: any) => {
   const urlMethod = req.url.split("/")[req.url.split("/").length - 1] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
   if (router.contains(urlMethod)) {
-    req.respond({ body: JSON.stringify(await constructResponse(urlMethod)) });
+    const data = JSON.stringify(await constructResponse(urlMethod));
+    console.log("[+] Responding with: ", data)
+    req.respond({ body:  data});
   } else {
     warningLog(
       `[+] Printing unknown request (${urlMethod}) and responding with an empty object`

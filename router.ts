@@ -1,23 +1,25 @@
 export default class Router {
-    models: Array<String> = [];
-    
-    constructor(){
-        this.populateModels();
-    }
+  models: Array<String> = [];
 
-    public reload(){
-        this.models = [];
-        this.populateModels();
-    }
+  constructor() {
+    this.populateModels();
+  }
 
-    private populateModels(){
-        for (const dirEntry of Deno.readDirSync("./models")) {
-            console.log(dirEntry.name);
-            // const data = await Deno.readTextFile("hello.txt");
-            // console.log(data);
-            this.models.push(dirEntry.name);
-        }
+  public reload() {
+    this.models = [];
+    this.populateModels();
+  }
+
+  public contains(text: String): boolean {
+    return this.models.includes(text);
+  }
+
+  private populateModels() {
+    for (const dirEntry of Deno.readDirSync("./models")) {
+      console.log(dirEntry.name);
+      // const data = await Deno.readTextFile("hello.txt");
+      // console.log(data);
+      this.models.push(dirEntry.name);
     }
-    
+  }
 }
-

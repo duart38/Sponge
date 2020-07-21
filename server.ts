@@ -4,6 +4,7 @@ import { warningLog, successLog } from "https://deno.land/x/colorlog/mod.ts";
 import Router from "./router.ts";
 import { constructResponse, constructHeaders } from "./actions/respond.ts";
 import Watcher from "./fileWatcher.ts";
+import { handleUnknownModel } from "./actions/generate.ts";
 
 const port = Number.parseInt(Deno.env.get("PORT") ?? "8000") || 8000;
 const server = serve({ port }); 
@@ -20,9 +21,8 @@ let handleRequest = async (req: any) => {
     console.log(JSON.parse(data));
     req.respond({ body:  data, headers: constructHeaders(req)});
   } else {
-    warningLog(
-      `[+] Printing unknown request (${urlMethod}) and responding with an empty object`
-    );
+    warningLog(`[+] Printing unknown request (${urlMethod}) and responding with an empty object`);
+    handleUnknownModel(urlMethod);
     printRequest({
       Method: req.method,
       Headers: req.headers,

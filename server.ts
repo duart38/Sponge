@@ -30,7 +30,7 @@ let handleRequest = async (req: any) => {
       URL: req.url,
       Length: req.contentLength,
     });
-    req.respond({});
+    req.respond({headers: constructHeaders(req)});
   }
 }
 

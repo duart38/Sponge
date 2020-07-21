@@ -1,5 +1,5 @@
 import { serve, Server } from "https://deno.land/std/http/server.ts";
-import { printUnknownRequest } from "./actions/print.ts";
+import { printRequest } from "./actions/print.ts";
 import { warningLog, successLog } from "https://deno.land/x/colorlog/mod.ts";
 import Router from "./router.ts";
 import { constructResponse } from "./actions/respond.ts";
@@ -16,13 +16,14 @@ let handleRequest = async (req: any) => {
   const urlMethod = req.url.split("/")[req.url.split("/").length - 1] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
   if (router.contains(urlMethod)) {
     const data = JSON.stringify(await constructResponse(urlMethod));
-    console.log("[+] Responding with: ", data)
+    successLog("[+] Responding with: ");
+    console.log(JSON.parse(data));
     req.respond({ body:  data});
   } else {
     warningLog(
       `[+] Printing unknown request (${urlMethod}) and responding with an empty object`
     );
-    printUnknownRequest({
+    printRequest({
       Method: req.method,
       Headers: req.headers,
       Body: req.body,

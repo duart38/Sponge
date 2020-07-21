@@ -2,7 +2,7 @@ import { serve, Server } from "https://deno.land/std/http/server.ts";
 import { printRequest } from "./actions/print.ts";
 import { warningLog, successLog } from "https://deno.land/x/colorlog/mod.ts";
 import Router from "./router.ts";
-import { constructResponse } from "./actions/respond.ts";
+import { constructResponse, constructHeaders } from "./actions/respond.ts";
 import Watcher from "./fileWatcher.ts";
 
 const port = Number.parseInt(Deno.env.get("PORT") ?? "8000") || 8000;
@@ -18,7 +18,7 @@ let handleRequest = async (req: any) => {
     const data = JSON.stringify(await constructResponse(urlMethod));
     successLog("[+] Responding with: ");
     console.log(JSON.parse(data));
-    req.respond({ body:  data});
+    req.respond({ body:  data, headers: constructHeaders(req)});
   } else {
     warningLog(
       `[+] Printing unknown request (${urlMethod}) and responding with an empty object`

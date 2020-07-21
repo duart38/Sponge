@@ -7,3 +7,9 @@ export async function constructResponse(model: string): Promise<Object> {
     let m  = await import(`../models/${model}?${Math.random()}.ts`);
     return m[Object.keys(m)[0]];
 }
+export function constructHeaders(req: any){
+    let headers = req.headers;
+    headers.append("Access-Control-Allow-Origin", "*")
+    headers.append("Access-Control-Allow-Headers", "*")
+    return headers;
+}

@@ -7,11 +7,10 @@ import Watcher from "./fileWatcher.ts";
 import { handleUnknownModel } from "./actions/generate.ts";
 
 const port = Number.parseInt(Deno.env.get("PORT") ?? "8000") || 8000;
-const server = serve({ port }); 
+const server = serve({ port });
 successLog(`[+] Server running on port: ${port}`);
 const router = new Router();
 const watcher = new Watcher("./models");
-
 
 let handleRequest = async (req: any) => {
   const urlMethod = req.url.split("/")[req.url.split("/").length - 1] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
@@ -19,9 +18,11 @@ let handleRequest = async (req: any) => {
     const data = JSON.stringify(await constructResponse(urlMethod));
     successLog("[+] Responding with: ");
     console.log(JSON.parse(data));
-    req.respond({ body:  data, headers: constructHeaders(req)});
+    req.respond({ body: data, headers: constructHeaders(req) });
   } else {
-    warningLog(`[+] Printing unknown request (${urlMethod}) and responding with an empty object`);
+    warningLog(
+      `[+] Printing unknown request (${urlMethod}) and responding with an empty object`,
+    );
     handleUnknownModel(urlMethod);
     printRequest({
       Method: req.method,
@@ -30,9 +31,9 @@ let handleRequest = async (req: any) => {
       URL: req.url,
       Length: req.contentLength,
     });
-    req.respond({headers: constructHeaders(req)});
+    req.respond({ headers: constructHeaders(req) });
   }
-}
+};
 
 for await (const req of server) {
   if (watcher.updated()) {
@@ -40,8 +41,7 @@ for await (const req of server) {
     router.reload(); // reload the models
     watcher.ack();
     handleRequest(req);
-  }else{
+  } else {
     handleRequest(req);
   }
-  
 }

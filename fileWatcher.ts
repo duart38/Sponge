@@ -16,7 +16,7 @@ export default class Watcher {
     for await (const event of watcher) {
       this.changed = true;
       successLog(
-        `[+] models updated. The next request will receive the changes (${event.kind})`
+        `[+] models updated. The next request will receive the changes (${event.kind})`,
       );
     }
   }

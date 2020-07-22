@@ -14,9 +14,9 @@ const router = new Router();
 const watcher = new Watcher(modelsFolder());
 
 let handleRequest = async (req: any) => {
-  const urlMethod = req.url.split("/")[req.url.split("/").length - 1] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
+  const urlMethod = req.url.split("/")[req.url.split("/").length - 1].split("?")[0] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
   if (router.contains(urlMethod)) {
-    const data = JSON.stringify(await constructResponse(urlMethod, req.headers));
+    const data = JSON.stringify(await constructResponse(urlMethod, req.headers, req.url));
     successLog("[+] Responding with: ");
     printRequest(JSON.parse(data));
     req.respond({ body: data, headers: constructHeaders(req) });

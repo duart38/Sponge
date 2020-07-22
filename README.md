@@ -15,6 +15,11 @@ deno run --allow-env --allow-net --allow-read --allow-write server.ts
 ```
 > allow write is needed here if you want to generate models from unkown requests
 
+You can also pass in custom model folders or change the print mode:
+```Shell
+deno run --allow-env --allow-net --allow-read --allow-write server.ts -m ./your_model_folder_path -p tree
+```
+
 ### Need some data?
 No problem. Just throw some **stuff** in the models folder (use about.ts as an example) and Sponge will watch for changes and reload accordingly.
 

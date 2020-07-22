@@ -1,4 +1,5 @@
 import config from "../config.js";
+import { modelsFolder } from "../CLA.ts";
 
 /**
  * Generates a boilerplate model
@@ -7,8 +8,8 @@ import config from "../config.js";
 function generateModel(name: string) {
   const varName: string = name.replace(".ts", "");
   const fileName: string = name.endsWith(".ts")
-    ? `./models/${name.trim()}`
-    : `./models/${name.trim()}.ts`;
+    ? `${modelsFolder()}/${name.trim()}`
+    : `${modelsFolder()}/${name.trim()}.ts`;
   console.log(fileName);
   Deno.writeTextFileSync(
     fileName,

@@ -5,19 +5,20 @@ import Router from "./router.ts";
 import { constructResponse, constructHeaders } from "./actions/respond.ts";
 import Watcher from "./fileWatcher.ts";
 import { handleUnknownModel } from "./actions/generate.ts";
+import { modelsFolder } from "./CLA.ts";
 
 const port = Number.parseInt(Deno.env.get("PORT") ?? "8000") || 8000;
 const server = serve({ port });
 successLog(`[+] Server running on port: ${port}`);
 const router = new Router();
-const watcher = new Watcher("./models");
+const watcher = new Watcher(modelsFolder());
 
 let handleRequest = async (req: any) => {
   const urlMethod = req.url.split("/")[req.url.split("/").length - 1] + ".ts"; // last piece of url (test/some/stuff) -> (stuff)
   if (router.contains(urlMethod)) {
     const data = JSON.stringify(await constructResponse(urlMethod, req.headers));
     successLog("[+] Responding with: ");
-    console.log(JSON.parse(data));
+    printRequest(JSON.parse(data));
     req.respond({ body: data, headers: constructHeaders(req) });
   } else {
     warningLog(

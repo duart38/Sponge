@@ -1,7 +1,7 @@
 import { jsonTree } from "https://deno.land/x/json_tree/mod.ts";
-import config from "../config.js";
+import { printMode } from "../CLA.ts";
 export const printRequest = (data: any) => {
-  switch (config.print_mode) {
+  switch (printMode()) {
     case "json":
       console.log(data);
       break;

@@ -1,3 +1,5 @@
+import { modelsFolder } from "./CLA.ts";
+
 export default class Router {
   models: Array<String> = [];
 
@@ -15,7 +17,7 @@ export default class Router {
   }
 
   private async populateModels() {
-    for (const dirEntry of Deno.readDirSync("./models")) {
+    for (const dirEntry of Deno.readDirSync(modelsFolder())) {
       console.log(dirEntry.name);
       // const data = await Deno.readTextFile("hello.txt");
       // console.log(data);

@@ -29,7 +29,7 @@ deno run --allow-env --allow-net --allow-read --allow-write https://raw.githubus
 ```
 
 ## Need some data?
-No problem. Just throw some **stuff** in the models folder (use about.ts as an example) and Sponge will watch for changes and reload accordingly.
+No problem. Just throw some **stuff** in the models folder (use asyncTest.ts as an example) and Sponge will watch for changes and reload accordingly.
 
 
 # Making plugins

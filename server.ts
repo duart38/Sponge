@@ -20,6 +20,7 @@ let handleRequest = async (req: any) => {
     const data = JSON.stringify(
       await constructResponse(urlMethod, req.headers, req.url),
     );
+    successLog(`[+] Request was received with path ${req.url} with method ${req.method}`)
     successLog("[+] Responding with: ");
     printRequest(JSON.parse(data));
     req.respond({ body: data, headers: constructHeaders(req) });

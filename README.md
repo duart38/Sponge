@@ -30,6 +30,7 @@ deno run --allow-env --allow-net --allow-read --allow-write https://raw.githubus
 
 ## Need some data?
 No problem. Just throw some **stuff** in the models folder (use asyncTest.ts as an example) and Sponge will watch for changes and reload accordingly.
+[Here's a nice library to get you better fake data](https://deno.land/x/deno_faker)
 
 
 # Making plugins

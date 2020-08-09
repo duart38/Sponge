@@ -19,6 +19,7 @@ export async function constructResponse(
 }
 export function constructHeaders(req: any) {
   let headers = req.headers;
+  headers.delete("Content-Length");
   headers.append("Access-Control-Allow-Origin", "*");
   headers.append("Access-Control-Allow-Headers", "*");
   return headers;
